@@ -34,6 +34,12 @@
             <version>${mysql.version}</version>
         </dependency>
 
+         <!-- spring boot 集成 redis 依赖包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
