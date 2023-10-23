@@ -20,14 +20,22 @@ class BackendApplicationTests {
     @Test
     void testUserCount() {
         System.out.println(userDao.getUserCount());
+        System.out.println(userDao.getUserCount());
+        System.out.println(userDao.getUserCount());
+        System.out.println(userDao.getUserCount());
     }
 
     @Test
-    void testRedis(){
+    void testRedis() {
         Set keys = redisTemplate.keys("*");
         System.out.println(keys);
     }
 
-
+    @Test
+    void testTransactional() {
+        userDao.testTransactional();
+        userDao.testTransactionTemplate();
+        userDao.testTransaction();
+    }
 
 }
