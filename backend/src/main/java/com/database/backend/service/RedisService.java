@@ -1,5 +1,6 @@
 package com.database.backend.service;
 
+import com.database.backend.enumeration.RedisEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -57,8 +59,12 @@ public class RedisService {
      * @param key
      * @return
      */
-    public String generateRedisKey(String prefix, Long key) {
+    public String generateRedisKey(String prefix, Integer key) {
         return prefix + SEPARATOR + key;
+    }
+
+    public String generateRedisKey(RedisEnum redisEnum, Integer key) {
+        return redisEnum.getPrefix() + SEPARATOR + key;
     }
 
     /**
@@ -132,6 +138,18 @@ public class RedisService {
                 redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
             }
         }
+    }
+
+
+    /**
+     * 删除缓存
+     *
+     * @param prefix
+     */
+    public void deleteByPrefix(String prefix) {
+        Set<String> keys = redisTemplate.keys(prefix + "*");
+        if(keys == null || keys.isEmpty())return;
+        redisTemplate.delete(keys);
     }
 
     /**

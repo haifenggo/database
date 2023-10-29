@@ -1,6 +1,9 @@
 package com.database.backend.dao;
 
+import com.database.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
@@ -26,6 +29,16 @@ public class UserDao {
 
     @Autowired
     TransactionTemplate transactionTemplate;
+
+    public User selectUser(Integer userId){
+        String sql = "select * from t_user where user_id = ?";
+        try{
+            User user = template.queryForObject(sql,  new BeanPropertyRowMapper<User>(User.class), userId);
+            return user;
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
     public int getUserCount() {
         String sql = "select count(1) from t_user";
