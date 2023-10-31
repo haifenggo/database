@@ -5,6 +5,7 @@
   <div class="web-body">
     <router-view></router-view>
   </div>
+  <el-backtop :right="10" :bottom="10" />
 </template>
 <script setup></script>
 <style lang="scss">
@@ -13,6 +14,7 @@ body {
 }
 .web-header {
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
