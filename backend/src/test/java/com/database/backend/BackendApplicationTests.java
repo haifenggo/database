@@ -1,8 +1,7 @@
 package com.database.backend;
 
-import com.database.backend.controller.UserController;
 import com.database.backend.dao.UserDao;
-import com.database.backend.entity.User;
+import com.database.backend.domain.entity.User;
 import com.database.backend.service.RedisService;
 import com.database.backend.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -37,10 +36,10 @@ class BackendApplicationTests {
 
     @Test
     void testUserCount() {
-        System.out.println(userDao.getUserCount());
-        System.out.println(userDao.getUserCount());
-        System.out.println(userDao.getUserCount());
-        System.out.println(userDao.getUserCount());
+//        System.out.println(userDao.getUserCount());
+//        System.out.println(userDao.getUserCount());
+//        System.out.println(userDao.getUserCount());
+//        System.out.println(userDao.getUserCount());
     }
 
     @Test
