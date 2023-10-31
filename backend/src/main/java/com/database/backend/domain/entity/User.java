@@ -1,4 +1,4 @@
-package com.database.backend.entity;
+package com.database.backend.domain.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;

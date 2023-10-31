@@ -1,6 +1,9 @@
 package com.database.backend.dao;
 
-import com.database.backend.entity.User;
+import com.database.backend.domain.entity.User;
+import com.database.backend.domain.queryForm.UserForm;
+import com.database.backend.util.PageParam;
+import com.database.backend.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,8 +15,10 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @描述
@@ -30,20 +35,42 @@ public class UserDao {
     @Autowired
     TransactionTemplate transactionTemplate;
 
-    public User selectUser(Integer userId){
+    public User selectUser(Integer userId) {
         String sql = "select * from t_user where user_id = ?";
-        try{
-            User user = template.queryForObject(sql,  new BeanPropertyRowMapper<User>(User.class), userId);
+        try {
+            User user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), userId);
             return user;
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public int getUserCount() {
+
+    public List<User> selectUserList(UserForm userForm) {
+        int pageNum = userForm.getPageNum();
+        int pageSize = userForm.getPageSize();
+        int offset = (pageNum - 1) * pageSize;
+
+        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM t_user");
+
+        // 添加排序字段和排序规则
+        PageUtil.addSortClause(sqlBuilder, userForm);
+
+        // 添加分页限制
+        PageUtil.addLimit(sqlBuilder);
+        String sql = sqlBuilder.toString();
+
+        try {
+            List<User> userList = template.query(sql, new BeanPropertyRowMapper<>(User.class), offset, pageSize);
+            return userList;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public int countUserList() {
         String sql = "select count(1) from t_user";
         Integer count = template.queryForObject(sql, Integer.class);
-
         return count;
     }
 
