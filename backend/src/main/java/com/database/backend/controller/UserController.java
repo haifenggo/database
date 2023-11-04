@@ -2,9 +2,11 @@ package com.database.backend.controller;
 
 import com.database.backend.domain.entity.User;
 import com.database.backend.domain.queryForm.UserForm;
+
 import com.database.backend.service.Impl.UserService1;
 import com.database.backend.util.PageResult;
 import com.database.backend.util.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +33,10 @@ public class UserController {
     @PostMapping("/user")
     public Result<PageResult<User>> getUserList(@RequestBody UserForm userForm){
         return Result.success(userService1.selectUserList(userForm));
+    }
+
+    @PostMapping("/user")
+    public R<PageResult<User>> getUserList(@RequestBody UserForm userForm){
+        return R.success(userService.selectUserList(userForm));
     }
 }
