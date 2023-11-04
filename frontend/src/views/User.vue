@@ -28,7 +28,6 @@
         <div class="table">
 
           <el-table :data="userList" style="width: 100%" stripe border fit>
-            <el-table-column fixed prop="id" label="主键ID"/>
             <el-table-column prop="userId" label="用户ID"/>
             <el-table-column prop="username" label="用户名"/>
             <el-table-column prop="password" label="密码"/>
@@ -115,7 +114,6 @@ async function deleteUser(row) {
 
 const dialogFormVisible = ref(false);
 const userInfo = reactive({
-  id: "",
   userId: "",
   username: "",
   password: "",

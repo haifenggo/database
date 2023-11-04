@@ -2,9 +2,9 @@ package com.database.backend.controller;
 
 import com.database.backend.domain.entity.User;
 import com.database.backend.domain.queryForm.UserForm;
-import com.database.backend.service.UserService;
+import com.database.backend.service.Impl.UserService1;
 import com.database.backend.util.PageResult;
-import com.database.backend.util.R;
+import com.database.backend.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserService1 userService1;
 
     @GetMapping("/index")
     public String test() {
@@ -24,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping("user/{id}")
-    public R<User> getUser(@PathVariable("id") Integer userId) {
-        return R.success(userService.getUser(userId));
+    public Result<User> getUser(@PathVariable("id") Integer userId) {
+        return Result.success(userService1.getUser(userId));
     }
 
     @PostMapping("/user")
-    public R<PageResult<User>> getUserList(@RequestBody UserForm userForm){
-        return R.success(userService.selectUserList(userForm));
+    public Result<PageResult<User>> getUserList(@RequestBody UserForm userForm){
+        return Result.success(userService1.selectUserList(userForm));
     }
 }
