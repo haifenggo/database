@@ -3,7 +3,7 @@ package com.database.backend;
 import com.database.backend.dao.UserDao;
 import com.database.backend.domain.entity.User;
 import com.database.backend.service.RedisService;
-import com.database.backend.service.UserService;
+import com.database.backend.service.Impl.UserService1;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,14 +21,14 @@ class BackendApplicationTests {
     RedisTemplate redisTemplate;
 
     @Autowired
-    UserService userService;
+    UserService1 userService1;
 
     @Autowired
     RedisService redisService;
 
     @Test
     void testUser(){
-        User user = userService.getUser(201);
+        User user = userService1.getUser(201);
         System.out.println(user);
     }
 

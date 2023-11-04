@@ -34,4 +34,14 @@ public class PageResult<T> {
 
     private Boolean emptyFlag;
 
+
+    public PageResult() {}
+
+
+    public PageResult(Long total, List records) {
+        this.total = total;
+        this.list = records;
+    }
+
+
 }
