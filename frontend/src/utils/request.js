@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Router from '../router'
-import { removeToken,getToken } from '../utils/auth'
+import Router from '@/router'
+import { removeToken,getToken } from './auth'
 
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url 
@@ -30,7 +30,7 @@ service.interceptors.request.use(
 //axios响应拦截器
 service.interceptors.response.use(res=>{
     if (res.data.code === 0 && res.data.msg === 'NOT_LOGIN') {// 返回登录页面
-        console.log('用户为登录, 直接跳转至登录页面');
+        console.log('用户未登录, 直接跳转至登录页面');
         removeToken();
         Router.replace('/login');
         return res;

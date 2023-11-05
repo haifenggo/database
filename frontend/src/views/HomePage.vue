@@ -5,12 +5,16 @@
         <el-affix :offset="80">
           <el-card>
             <el-menu default-active="2" class="el-menu-vertical-demo">
+              <span @click="router.push('/login')">
+               <el-menu-item index="3">登录 </el-menu-item>
+              </span>
               <span @click="router.push('/user')">
                <el-menu-item index="11">用户 </el-menu-item>
               </span>
               <span @click="router.push('/article')">
                <el-menu-item index="2">文章 </el-menu-item>
               </span>
+        
             </el-menu>
           </el-card>
         </el-affix>

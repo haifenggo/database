@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface LogMapper {
 
-    @Insert("insert into t_login_log (user_id, login_result, create_time) values (#{userId},#{loginResult},#{createTime})")
+    @Insert("insert into t_login_log (user_id, username, login_result, create_time) values (#{userId},#{username}, #{loginResult},#{createTime})")
     void addLoginLog(LoginLog loginLog);
 
     @Select("select * from t_login_log")

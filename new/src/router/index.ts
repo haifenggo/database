@@ -10,32 +10,32 @@ const routes: Array<RouteConfig> = [
 	},
 	{
 		path: "/login",
-		component: () => import("@/views/login/loginView.vue"),
+		component: () => import("@/../../../frontend/src/views/login/loginView.vue"),
 	},
 	{
 		path: "/article",
-		component: () => import("@/views/main/articleView.vue"),
+		component: () => import("@/../../../frontend/src/views/main/articleView.vue"),
 		redirect:'/article/page',
 		children: [
 			{
 				path: "/article/page",
-				component: () => import("@/views/component/articlePageView.vue"),
+				component: () => import("@/../../../frontend/src/views/component/articlePageView.vue"),
 			},
 			{
 				path: "/article/posted",
-				component: () => import("@/views/component/postedView.vue"),
+				component: () => import("@/../../../frontend/src/views/component/postedView.vue"),
 			},
 			{
 				path: "/article/like",
-				component: () => import("@/views/component/likeView.vue"),
+				component: () => import("@/../../../frontend/src/views/component/likeView.vue"),
 			},
 			{
 				path: "/article/read",
-				component: () => import("@/views/component/readView.vue"),
+				component: () => import("@/../../../frontend/src/views/component/readView.vue"),
 			},
 			{
 				path: "/article/updateOrAdd",
-				component: () => import("@/views/component/updateOrAddView.vue"),
+				component: () => import("@/../../../frontend/src/views/component/updateOrAddView.vue"),
 			}
 		],
 	},

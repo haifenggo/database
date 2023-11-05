@@ -10,5 +10,11 @@ export const userApi = {
     updateUser: (user) => {
         return postRequest(`/user/update`, user);
     },
+    insertUser: (user) => {
+        return postRequest(`/user/insert`, user);
+    },
+    deleteUser: (userId) => {
+        return getRequest(`/user/delete/${userId}`);
+    },
 }
 

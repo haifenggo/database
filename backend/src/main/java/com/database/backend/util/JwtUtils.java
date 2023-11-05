@@ -3,10 +3,12 @@ package com.database.backend.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.Map;
 
+@Slf4j
 public class JwtUtils {
 
     private static String signKey = "itheima";
@@ -31,10 +33,15 @@ public class JwtUtils {
      * @return JWT第二部分负载 payload 中存储的内容
      */
     public static Claims parseJWT(String jwt){
-        Claims claims = Jwts.parser()
-                .setSigningKey(signKey)
-                .parseClaimsJws(jwt)
-                .getBody();
+        Claims claims = null;
+        try{
+            claims = Jwts.parser()
+                    .setSigningKey(signKey)
+                    .parseClaimsJws(jwt)
+                    .getBody();
+        }catch (Exception e){
+            log.error("claims = null");
+        }
         return claims;
     }
 }

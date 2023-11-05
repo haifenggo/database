@@ -6,6 +6,8 @@ import com.database.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -15,5 +17,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         return userMapper.getByUsernameAndPassword(user);
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        int deleteUser = userMapper.deleteUser(userId);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
+
+    @Override
+    public void insertUser(User user) {
+        user.setCreateTime(LocalDateTime.now());
+        userMapper.insertUser(user);
     }
 }

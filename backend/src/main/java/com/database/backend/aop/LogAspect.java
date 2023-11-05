@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -31,7 +32,10 @@ public class LogAspect {
         //获取请求头中的jwt令牌, 解析令牌
         String jwt = request.getHeader("token");
         Claims claims = JwtUtils.parseJWT(jwt);
-        Integer operateUser = (Integer) claims.get("userId");
+        Integer operateUser = null;
+        if (claims != null) {
+            operateUser = (Integer) claims.get("userId");
+        }
 
         //操作时间
         LocalDateTime operateTime = LocalDateTime.now();
@@ -59,7 +63,7 @@ public class LogAspect {
 
         DataTracer dataTracer = DataTracer.builder()
                 .userId(operateUser)
-                .content("操作人："+operateUser+"\n调用方法"+methodName+"\n调用参数"+methodParams)
+                .content("操作人：" + operateUser + "\n调用方法" + methodName + "\n调用参数" + methodParams)
                 .createTime(LocalDateTime.now())
                 .build();
 

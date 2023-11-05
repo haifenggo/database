@@ -13,11 +13,11 @@ import java.util.List;
 public class PageParam {
 
     @NotNull(message = "分页参数不能为空")
-    private Integer pageNum;
+    private Integer pageNum; // 第几页
 
     @NotNull(message = "每页数量不能为空")
     @Max(value = 200, message = "每页最大为200")
-    private Integer pageSize;
+    private Integer pageSize; // 每页数量
 
     @Size(max = 10, message = "排序字段最多10")
     @Valid

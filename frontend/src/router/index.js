@@ -16,7 +16,18 @@ const router = createRouter({
         {
           path: "article",
           name: "article",
-          component: () => import("@/views/Article.vue"),
+          component: () => import("@/views/Post.vue"),
+          // component: () => import("@/views/component/articlePageView.vue"),
+        },
+        {
+          path: "/post/:postId/",
+          name: "postDetail",
+          component: () => import("@/views/PostDetail.vue"),
+        },
+        {
+          path: "login",
+          name: "login",
+          component: () => import("@/views/login/loginView.vue"),
         },
       ],
     },

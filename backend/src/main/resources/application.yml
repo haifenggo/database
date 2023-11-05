@@ -1,0 +1,69 @@
+server:
+  port: 8880
+
+mybatis:
+  configuration:
+    #下划线转驼峰
+    map-underscore-to-camel-case: true
+
+spring:
+  datasource:
+    #指定数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库jdbc连接url地址
+#    url: jdbc:mysql://192.168.199.129:3306/database?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/database_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #数据库账号
+    username: root
+    #数据库密码
+#    password: mysqlroot
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+    druid: # http://localhost:8080/druid/login.html
+      initial-size: 5      #     初始化大小
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000      #     配置获取连接等待超时的时间
+      time-between-eviction-runs-millis: 60000      #     配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000     #     配置一个连接在池中最小生存的时间，单位是毫秒
+      test-while-idle: true #     申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      test-on-borrow: false       #     获取连接时执行检测，建议关闭，影响性能
+      pool-prepared-statements: false     #     是否开启PSCache,PSCahce对支持游标的数据库性能提示巨大，oracle建议开启，mysql下建议关闭
+      max-pool-prepared-statement-per-connection-size: 20      #     开启poolPreparedStatments后生效
+
+      web-stat-filter:     #     配置监控属性： 在druid-starter的： com.alibaba.druid.spring.boot.autoconfigure.stat包下进行的逻辑配置
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*' #对这些请求放行
+
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*  #配置DruidStatViewServlet的访问地址。后台监控页面的访问地址
+        reset-enable: false #禁用HTML页面上的“重置”功能，会把所有监控的数据全部清空，一般不使用
+        login-username: admin #监控页面登录的用户名
+        login-password: admin #监控页面登录的密码
+        allow:   #IP白名单(没有配置或者为空，则允许所有访问)。允许谁访问druid后台，默认允许全部用户访问。
+        deny:  #IP黑名单 (存在共同时，deny优先于allow)。不允许谁访问druid后台
+
+      filter:
+        stat:
+          enabled: true         # 开启DruidDataSource状态监控
+          db-type: mysql        # 数据库的类型
+          log-slow-sql: true    # 开启慢SQL记录功能
+          slow-sql-millis: 2000 # 默认3000毫秒，这里超过2s，就是慢，记录到日志
+        wall:
+          enabled: true
+          config:
+            drop-table-allow: false
+
+
+  data:
+    redis: # 192.168.56.1
+#      host: 192.168.199.129
+      host: localhost
+      port: 6379
+#      password: redisroot
+      database: 0
+
