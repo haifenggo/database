@@ -31,13 +31,13 @@ public class PostController {
 
 
     @PostMapping("/post")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PageResult<PostVO>> getPostList(@RequestBody PostForm postForm) {
         return Result.success(postService.getPostList(postForm));
     }
 
     @GetMapping("/post/{postId}")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PostDetailVO> getPostDetail(@PathVariable("postId") Integer postId){
         // todo: username x
         // todo: likeCount x
@@ -49,6 +49,7 @@ public class PostController {
     }
 
     @GetMapping("/post/delete/{postId}")
+    @Tracer(type = TracerEnum.REQUEST)
     public Result deleteById(@PathVariable("postId") Integer postId) {
         // todo: 删除点赞
         postService.deleteByPostId(postId);
@@ -57,12 +58,14 @@ public class PostController {
     }
 
     @PostMapping("/post/update")
+    @Tracer(type = TracerEnum.REQUEST)
     public Result updatePost(@RequestBody Post post) {
         postService.updatePost(post);
         return Result.success();
     }
 
     @PostMapping("/post/insert")
+    @Tracer(type = TracerEnum.REQUEST)
     public Result addPost(@RequestBody Post post) {
         postService.addPost(post);
         return Result.success();

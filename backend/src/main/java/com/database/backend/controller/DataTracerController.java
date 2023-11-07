@@ -24,7 +24,7 @@ public class DataTracerController {
     DataTracerService dataTracerService;
 
     @PostMapping("/tracer")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PageResult<DataTracer>> getPostList(@RequestBody TracerForm pageParam) {
         return Result.success(dataTracerService.getTracerList(pageParam));
     }

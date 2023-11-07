@@ -6,4 +6,6 @@ package com.database.backend.util;
  */
 public class TimeUtil {
     public static final Long TWO_HOUR = 7200L;
+
+    public static final Long TWO_MINUTE = 120L;
 }

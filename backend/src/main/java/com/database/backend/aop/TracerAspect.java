@@ -1,5 +1,6 @@
 package com.database.backend.aop;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.database.backend.context.BaseContext;
 import com.database.backend.domain.entity.DataTracer;
@@ -55,7 +56,6 @@ public class TracerAspect {
         String methodName = method.getName();
         Tracer annotation = method.getAnnotation(Tracer.class);
         Object[] args = joinPoint.getArgs();
-        String methodParams = Arrays.toString(args);
         TracerEnum tracerEnum = annotation.type();
 //        String returnValue = JSONObject.toJSONString(result);
         Integer userId = BaseContext.getCurrentId();
@@ -64,7 +64,7 @@ public class TracerAspect {
 //                + "\n" + "操作类型:" + tracerEnum.getDesc()
                 + "\n" + "执行耗时:" + costTime + "ms"
                 + "\n" + "调用方法:" + methodName
-                + "\n" + "方法参数:" + methodParams;
+                + "\n" + "方法参数:" + JSON.toJSONString(args);
 //                + "\n" + "执行结果:" + returnValue;
 
         DataTracer dataTracer = DataTracer.builder()

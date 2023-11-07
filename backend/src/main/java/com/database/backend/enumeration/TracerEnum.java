@@ -14,8 +14,8 @@ public enum TracerEnum {
     UPDATE(2,"UPDATE"),
     DELETE(3,"DELETE"),
     SELECT(4,"SELECT"),
-    URI(5,"URI");
+    REQUEST(5,"REQUEST");
 
-    private int value;
-    private String desc;
+    private final int value;
+    private final String desc;
 }

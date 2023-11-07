@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Tracer {
-    TracerEnum type() default TracerEnum.URI;
+    TracerEnum type() default TracerEnum.REQUEST;
 
 
 }

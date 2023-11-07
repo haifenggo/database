@@ -9,7 +9,11 @@ import lombok.Data;
  */
 @AllArgsConstructor
 public enum RedisEnum {
-    USER("user","user");
+    USER("user","user"),
+    POST("post","post"),
+    LIKE("like","like"),
+    LOGIN("login","login"),
+    TRACER("tracer","tracer");
     private final String prefix;
     private final String desc;
 

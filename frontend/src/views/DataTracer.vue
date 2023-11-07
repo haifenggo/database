@@ -49,15 +49,16 @@ import { toRefs, ref, reactive, onMounted } from "vue";
 import { ElMessage } from "element-plus";
 import router from "@/router";
 function formatContent(row) {
-  console.log(row.content);
-  return row.content.replace(/\r\n/g, "<br>");
+  let res = row.content.replace(/\n/g, "<br>");
+  // console.log(res);
+  return res;
 }
 const tracerEnum = {
   1: "INSERT",
   2: "UPDATE",
   3: "DELETE",
   4: "SELECT",
-  5: "URI",
+  5: "REQUEST",
 };
 
 const formatType = (row) => {

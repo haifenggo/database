@@ -6,6 +6,7 @@ import com.database.backend.domain.entity.LoginLog;
 import com.database.backend.domain.entity.User;
 import com.database.backend.enumeration.LoginEnum;
 import com.database.backend.enumeration.TracerEnum;
+import com.database.backend.service.LoginLogService;
 import com.database.backend.service.UserService;
 import com.database.backend.util.JwtUtils;
 import com.database.backend.util.Result;
@@ -25,13 +26,15 @@ import java.util.Map;
 @RestController
 @Slf4j
 public class LoginController {
-//    @Autowired
-//    private LogService logService;
+
+    @Autowired
+    LoginLogService loginLogService;
+
     @Autowired
     private UserService userService;
 
     @PostMapping("/login")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result login(@RequestBody User user, HttpServletRequest request) {
         log.info("{}登陆了", user);
 
@@ -51,7 +54,7 @@ public class LoginController {
                     .loginResult(LoginEnum.SUCCESS.getValue())
                     .createTime(LocalDateTime.now())
                     .build();
-//            logService.addLoginLog(loginLog);
+            loginLogService.insertLog(loginLog);
             BaseContext.setCurrentId(u.getUserId());
             return Result.success(jwt);
         }
@@ -64,8 +67,7 @@ public class LoginController {
                 .loginResult(LoginEnum.FAILURE.getValue())
                 .createTime(LocalDateTime.now())
                 .build();
-//        logService.addLoginLog(loginLog);
-
+        loginLogService.insertLog(loginLog);
         return Result.error("用户名或密码错误！");
     }
 }

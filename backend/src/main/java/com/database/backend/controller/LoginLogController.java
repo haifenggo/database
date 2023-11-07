@@ -25,7 +25,7 @@ public class LoginLogController {
     LoginLogService loginLogService;
 
     @PostMapping("/loginLog")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PageResult<LoginLog>> getPostList(@RequestBody LoginLogForm pageParam) {
         return Result.success(loginLogService.getLoginLogList(pageParam));
     }

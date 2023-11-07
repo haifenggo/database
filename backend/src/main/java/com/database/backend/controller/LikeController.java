@@ -24,20 +24,20 @@ public class LikeController {
     private LikeService likeService;
 
     @PostMapping("/like")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PageResult<Like>> getLikeList(@RequestBody LikeForm likeForm) {
         return Result.success(likeService.getLikeList(likeForm));
     }
 
     @GetMapping("/like/delete/{id}")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result deleteById(@PathVariable("id") Integer id) {
         likeService.deleteById(id);
         return Result.success();
     }
 
     @GetMapping("/like/post/{id}")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result likePost(@PathVariable("id") Integer id) {
         Boolean liked = likeService.like(BaseContext.getCurrentId(), id);
         return Result.success(liked);

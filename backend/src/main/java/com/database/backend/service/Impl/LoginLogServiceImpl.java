@@ -30,4 +30,9 @@ public class LoginLogServiceImpl implements LoginLogService {
         PageResult<LoginLog> pageResult = new PageResult<>(loginLogList.getTotal(), loginLogList.getResult());
         return pageResult;
     }
+
+    @Override
+    public void insertLog(LoginLog loginLog) {
+        loginLogMapper.insertLog(loginLog);
+    }
 }

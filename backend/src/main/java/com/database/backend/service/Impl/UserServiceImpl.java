@@ -2,10 +2,12 @@ package com.database.backend.service.Impl;
 
 import com.database.backend.aop.Tracer;
 import com.database.backend.domain.entity.User;
+import com.database.backend.enumeration.RedisEnum;
 import com.database.backend.enumeration.TracerEnum;
 import com.database.backend.mapper.LikeMapper;
 import com.database.backend.mapper.PostMapper;
 import com.database.backend.mapper.UserMapper;
+import com.database.backend.service.RedisService;
 import com.database.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     LikeMapper likeMapper;
 
+    @Autowired
+    RedisService redisService;
+
 
     @Override
     public User login(User user) {
@@ -37,6 +42,9 @@ public class UserServiceImpl implements UserService {
         // todo: 删除用户文章点赞等 x
         Integer deletePost = postMapper.deleteByUserId(userId);
 
+        redisService.deleteByPrefix(RedisEnum.USER);
+        redisService.deleteByPrefix(RedisEnum.POST);
+        redisService.deleteByPrefix(RedisEnum.LIKE);
     }
 
     /*

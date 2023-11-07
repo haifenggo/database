@@ -12,4 +12,6 @@ import com.database.backend.util.PageResult;
 public interface LoginLogService {
 
     PageResult<LoginLog>  getLoginLogList(LoginLogForm pageParam);
+
+    void insertLog(LoginLog loginLog);
 }

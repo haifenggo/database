@@ -2,6 +2,7 @@ package com.database.backend;
 
 import com.database.backend.dao.UserDao;
 import com.database.backend.domain.entity.User;
+import com.database.backend.enumeration.RedisEnum;
 import com.database.backend.service.RedisService;
 import com.database.backend.service.Impl.UserService1;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,7 @@ class BackendApplicationTests {
     void testRedis() {
         Set keys = redisTemplate.keys("*");
         System.out.println(keys);
-        redisService.deleteByPrefix("user");
+        redisService.deleteByPrefix(RedisEnum.USER);
         System.out.println(redisTemplate.keys("user*"));
     }
 

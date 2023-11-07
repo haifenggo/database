@@ -67,6 +67,11 @@ public class RedisService {
         return redisEnum.getPrefix() + SEPARATOR + key;
     }
 
+    public String generateRedisKey(RedisEnum redisEnum, Object obj) {
+        String key = JSON.toJSONString(obj);
+        return redisEnum.getPrefix() + SEPARATOR + key;
+    }
+
     /**
      * redis key 解析成真实的内容
      *
@@ -146,7 +151,8 @@ public class RedisService {
      *
      * @param prefix
      */
-    public void deleteByPrefix(String prefix) {
+    public void deleteByPrefix(RedisEnum redisEnum) {
+        String prefix = redisEnum.getPrefix();
         Set<String> keys = redisTemplate.keys(prefix + "*");
         if(keys == null || keys.isEmpty())return;
         redisTemplate.delete(keys);

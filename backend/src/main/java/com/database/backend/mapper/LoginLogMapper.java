@@ -8,6 +8,7 @@ import com.database.backend.domain.queryForm.LoginLogForm;
 import com.database.backend.enumeration.TracerEnum;
 import com.database.backend.util.PageParam;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -29,4 +30,11 @@ public interface LoginLogMapper {
             "</script>"
     )
     Page<LoginLog> getLoginLogList(@Param("pageParam") LoginLogForm pageParam);
+
+
+    @Tracer(type = TracerEnum.INSERT)
+    @Insert("insert into t_login_log (user_id, username, login_ip, login_result, create_time) " +
+            "values (#{userId}, #{username}, #{loginIp}, #{loginResult}, #{createTime})"
+    )
+    void insertLog(LoginLog loginLog);
 }

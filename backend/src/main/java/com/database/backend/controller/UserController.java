@@ -30,19 +30,19 @@ public class UserController {
 
 
     @GetMapping("user/{id}")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<User> getUser(@PathVariable("id") Integer userId) {
         return Result.success(userService1.getUser(userId));
     }
 
     @PostMapping("/user")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result<PageResult<User>> getUserList(@RequestBody UserForm userForm){
         return Result.success(userService1.selectUserList(userForm));
     }
 
     @PostMapping("user/insert")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result insertUser(@RequestBody User user) {
         if(BaseContext.getCurrentId() == null){
             return Result.error("操作失败");
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("user/delete/{id}")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result deleteUser(@PathVariable("id") Integer userId) {
         userService.deleteUser(userId);
 
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @PostMapping("user/update")
-    @Tracer(type = TracerEnum.URI)
+    @Tracer(type = TracerEnum.REQUEST)
     public Result updateUser(@RequestBody User user) {
 //        if(user.getUserId() != BaseContext.getCurrentId()){
 //            return Result.error("操作失败");
