@@ -6,13 +6,22 @@
           <el-card>
             <el-menu default-active="2" class="el-menu-vertical-demo">
               <span @click="router.push('/login')">
-               <el-menu-item index="3">登录 </el-menu-item>
+               <el-menu-item index="1">登录页面 </el-menu-item>
               </span>
               <span @click="router.push('/user')">
-               <el-menu-item index="11">用户 </el-menu-item>
+               <el-menu-item index="2">用户列表 </el-menu-item>
               </span>
               <span @click="router.push('/article')">
-               <el-menu-item index="2">文章 </el-menu-item>
+               <el-menu-item index="3">文章列表 </el-menu-item>
+              </span>
+              <span @click="router.push('/like')">
+               <el-menu-item index="4">点赞列表 </el-menu-item>
+              </span>
+              <span @click="router.push('/loginLog')">
+               <el-menu-item index="5">登录日志 </el-menu-item>
+              </span>
+              <span @click="router.push('/dataTracer')">
+               <el-menu-item index="6">数据跟踪 </el-menu-item>
               </span>
         
             </el-menu>

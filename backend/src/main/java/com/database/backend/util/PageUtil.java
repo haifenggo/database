@@ -25,7 +25,7 @@ public class PageUtil {
         return pageResult;
     }
 
-    public static void addSortClause(StringBuilder sqlBuilder, PageParam pageParam) {
+    public static void addSortClause(StringBuffer sqlBuilder, PageParam pageParam) {
         List<PageParam.SortItem> sortItems = pageParam.getSortItemList();
         if (sortItems != null && !sortItems.isEmpty()) {
             sqlBuilder.append(" ORDER BY ");
@@ -45,8 +45,7 @@ public class PageUtil {
         }
     }
 
-    public static void addLimit(StringBuilder sqlBuilder){
+    public static void addLimit(StringBuffer sqlBuilder){
         sqlBuilder.append(" LIMIT ?, ?");
     }
-
 }

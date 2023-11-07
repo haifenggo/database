@@ -17,9 +17,9 @@ DBAxios.interceptors.request.use(
     //     "Content-Type, Authorization, token"; // 允许的HTTP头部信息
       config.headers["token"] = token;
     }
-    console.log("拦截token");
-    console.log(token);
-    console.log("拦截token");
+    // console.log("拦截token");
+    // console.log(token);
+    // console.log("拦截token");
     return config;
   },
   (error) => {

@@ -51,7 +51,7 @@ public class UserDao {
         int pageSize = userForm.getPageSize();
         int offset = (pageNum - 1) * pageSize;
 
-        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM t_user");
+        StringBuffer sqlBuilder = new StringBuffer("SELECT * FROM t_user");
 
         // 添加排序字段和排序规则
         PageUtil.addSortClause(sqlBuilder, userForm);

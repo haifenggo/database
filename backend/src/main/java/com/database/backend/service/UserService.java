@@ -11,4 +11,6 @@ public interface UserService {
 
     void updateUser(User user);
     void insertUser(User user);
+
+    User selectById(Integer userId);
 }

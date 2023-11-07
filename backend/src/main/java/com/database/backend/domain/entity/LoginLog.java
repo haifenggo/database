@@ -1,6 +1,7 @@
 package com.database.backend.domain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
@@ -25,5 +26,6 @@ public class LoginLog {
     private String username;
     private String loginIp;
     private Integer loginResult;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

@@ -1,9 +1,13 @@
 package com.database.backend.controller;
 
+import com.database.backend.aop.Tracer;
+import com.database.backend.context.BaseContext;
 import com.database.backend.domain.entity.Post;
 import com.database.backend.domain.queryForm.PostForm;
 import com.database.backend.domain.vo.PostDetailVO;
 import com.database.backend.domain.vo.PostVO;
+import com.database.backend.enumeration.TracerEnum;
+import com.database.backend.service.LikeService;
 import com.database.backend.service.PostService;
 import com.database.backend.util.PageResult;
 import com.database.backend.util.Result;
@@ -20,19 +24,27 @@ import java.time.LocalDateTime;
 public class PostController {
     @Autowired
     private PostService postService;
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    LikeService likeService;
+
 
 
     @PostMapping("/post")
+    @Tracer(type = TracerEnum.URI)
     public Result<PageResult<PostVO>> getPostList(@RequestBody PostForm postForm) {
         return Result.success(postService.getPostList(postForm));
     }
 
     @GetMapping("/post/{postId}")
+    @Tracer(type = TracerEnum.URI)
     public Result<PostDetailVO> getPostDetail(@PathVariable("postId") Integer postId){
-        // todo: 补充liked和username
+        // todo: username x
+        // todo: likeCount x
         PostDetailVO postDetail = postService.getPostDetail(postId);
+        postDetail.setLikeCount(likeService.selectPostLikeCount(postId));
+        postDetail.setLiked(likeService.liked(BaseContext.getCurrentId(),postId));
+
         return Result.success(postDetail);
     }
 

@@ -1,6 +1,7 @@
 package com.database.backend.domain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
@@ -24,5 +25,6 @@ public class DataTracer {
     private Integer userId;
     private Integer type;
     private String content;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

@@ -53,7 +53,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
                 ////////////////////////////////////
 
             } catch (Exception e) {//jwt解析失败
-                e.printStackTrace();
+//                e.printStackTrace();
 //                log.info("解析令牌失败, 返回未登录错误信息");
                 Result error = Result.error("NOT_LOGIN");
                 //手动转换 对象--json --------> 阿里巴巴fastJSON

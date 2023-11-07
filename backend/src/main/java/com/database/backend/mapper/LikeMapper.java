@@ -1,25 +1,41 @@
 package com.database.backend.mapper;
 
+import com.database.backend.aop.Tracer;
 import com.database.backend.domain.entity.Like;
+import com.database.backend.domain.queryForm.LikeForm;
 import com.database.backend.domain.vo.PostVO;
+import com.database.backend.enumeration.TracerEnum;
 import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
+import java.time.LocalDateTime;
 
 @Mapper
 public interface LikeMapper {
 
-    @Delete("delete from t_like where post_id=#{id}")
-    void deleteByPostId(Integer id);
+    @Tracer(type = TracerEnum.SELECT)
+    @Select("<script>" +
+            "select * from t_like " +
+            "ORDER BY " +
+            "<foreach collection='likeForm.sortItemList' item='item' separator=','>" +
+            "${item.column} ${item.isAsc ? 'ASC' : 'DESC'}" +
+            "</foreach>" +
+            "</script>"
+    )
+    Page<Like> getLikeList(@Param("likeForm") LikeForm likeForm);
+    @Tracer(type = TracerEnum.DELETE)
+    @Delete("delete from t_like where id=#{id}")
+    void deleteById(Integer id);
+    @Tracer(type = TracerEnum.SELECT)
+    @Select("select * from t_like where user_id = #{userId} and post_id = #{postId}")
+    Like selectOne(Integer userId, Integer postId);
+    @Tracer(type = TracerEnum.INSERT)
+    @Insert("insert into t_like (user_id, post_id, create_time) values (#{userId},#{postId},#{time})")
+    void insertLike(Integer userId, Integer postId, LocalDateTime time);
+    @Tracer(type = TracerEnum.DELETE)
+    @Delete("delete from t_like where user_id = #{userId} and post_id = #{postId}")
+    void deleteLike(Integer userId, Integer postId);
 
-    @Insert("insert into t_like (user_id, post_id, create_time) values (#{userId},#{postId},#{createTime})")
-    void addLike(Like like);
-
-    @Select("select like_id from t_like where user_id=#{userId} and post_id=#{postId}")
-    Integer getLikeByPostIdAndUserId(Integer postId,Integer userId);
-
-    @Select("select * from t_post where post_id in(select post_id from t_like where user_id =#{userId})")
-    Page<PostVO> getLike(Integer userId);
+    @Select("select count(*) from t_like where  post_id = #{postId}")
+    Integer selectPostLikeCount(Integer postId);
 }

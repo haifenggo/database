@@ -121,7 +121,7 @@ async function deletePost(row) {
   }
 }
 async function postDetail(row) {
-  ElMessage.success(String(row.postId));
+  // ElMessage.success(String(row.postId));
   router.push(`post/${row.postId}`);
   // console.log(row.postId);
 }

@@ -17,6 +17,7 @@ public class PostDetailVO {
     private String content;
     private String title;
     private Boolean liked;
+    private Integer likeCount;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

@@ -20,6 +20,11 @@ const router = createRouter({
           // component: () => import("@/views/component/articlePageView.vue"),
         },
         {
+          path: "like",
+          name: "like",
+          component: () => import("@/views/like.vue"),
+        },
+        {
           path: "/post/:postId/",
           name: "postDetail",
           component: () => import("@/views/PostDetail.vue"),
@@ -28,6 +33,18 @@ const router = createRouter({
           path: "login",
           name: "login",
           component: () => import("@/views/login/loginView.vue"),
+        },
+
+        {
+          path: "loginLog",
+          name: "loginLog",
+          component: () => import("@/views/LoginLog.vue"),
+        },
+
+        {
+          path: "dataTracer",
+          name: "dataTracer",
+          component: () => import("@/views/DataTracer.vue"),
         },
       ],
     },

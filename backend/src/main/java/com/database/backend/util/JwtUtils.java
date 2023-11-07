@@ -41,6 +41,7 @@ public class JwtUtils {
                     .getBody();
         }catch (Exception e){
             log.error("claims = null");
+            throw e;
         }
         return claims;
     }

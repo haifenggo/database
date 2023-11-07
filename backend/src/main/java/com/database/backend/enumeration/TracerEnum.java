@@ -1,23 +1,21 @@
 package com.database.backend.enumeration;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 /**
  * @描述
- * @日期 2023/11/5 14:11
+ * @日期 2023/11/6 10:44
  */
 @AllArgsConstructor
 @Getter
-public enum LoginEnum {
+public enum TracerEnum {
+    INSERT(1,"INSERT"),
+    UPDATE(2,"UPDATE"),
+    DELETE(3,"DELETE"),
+    SELECT(4,"SELECT"),
+    URI(5,"URI");
 
-    SUCCESS(0, "登录成功"),
-
-    FAILURE(1, "登录失败"),
-    LOGOUT(2, "退出登录");
     private int value;
     private String desc;
-
-
 }

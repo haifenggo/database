@@ -1,9 +1,11 @@
 package com.database.backend.service.Impl;
 
+import com.database.backend.aop.Tracer;
 import com.database.backend.dao.UserDao;
 import com.database.backend.domain.entity.User;
 import com.database.backend.domain.queryForm.UserForm;
 import com.database.backend.enumeration.RedisEnum;
+import com.database.backend.enumeration.TracerEnum;
 import com.database.backend.service.RedisService;
 import com.database.backend.util.PageResult;
 import com.database.backend.util.PageUtil;
@@ -24,7 +26,6 @@ public class UserService1 {
 
     @Autowired
     RedisService redisService;
-
     public User getUser(Integer userId) {
         String redisKey = redisService.generateRedisKey(RedisEnum.USER, userId);
         if (!redisService.hasKey(redisKey)) {
@@ -33,7 +34,6 @@ public class UserService1 {
         }
         return redisService.getObject(redisKey, User.class);
     }
-
     public PageResult<User> selectUserList(UserForm userForm) {
         // 查询总记录数
         long total = userDao.countUserList();
